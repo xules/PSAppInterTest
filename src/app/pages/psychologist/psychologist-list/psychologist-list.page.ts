@@ -29,16 +29,8 @@ export class PsychologistListPage implements OnInit {
     this.psychologistService.getAll()
       .then( async data => {
         let psycos = await data;
-        console.log('Listado de Psicologos');
-        console.log(data.status);
         if (data.status == 200) {
-          console.log(data.data);
-          console.log(data.headers);
-          let psychos: Psychologist[] = JSON.parse(data.data);
           this.psychologists = JSON.parse(data.data);
-          psychos.forEach(ps => {
-            console.log('Datos: ' + ps.id + ' -> ' + ps.name);
-          });
         }else {
           const alert = await this.alertController.create({
             header: 'Ha habido un problema al cargar los psicólogos',
@@ -47,7 +39,6 @@ export class PsychologistListPage implements OnInit {
                 text: 'OK',
                 id: 'confirm-button',
                 handler: () => {
-                  console.log('Confirm Okay');
                   this.navController.navigateForward('login')
                 }
               }
@@ -65,7 +56,6 @@ export class PsychologistListPage implements OnInit {
               text: 'OK',
               id: 'confirm-button',
               handler: () => {
-                console.log('Confirm Okay');
                 this.navController.navigateForward('login')
               }
             }
@@ -76,18 +66,7 @@ export class PsychologistListPage implements OnInit {
       );
 
 
-    this.psychologistService.getById('bb7a9087-e698-4eeb-b2ec-d5f2355d7d6b')
-      .then( async data  => {
-        let psycos = await data;
-        console.log('Psicologo bb7a9087-e698-4eeb-b2ec-d5f2355d7d6b');
-        console.log(data);
 
-      })
-      .catch(error => {
-        console.log('Psycho bb7a9087-e698-4eeb-b2ec-d5f2355d7d6b error');
-        console.log(error);
-        }
-      );
   }
 
   /**

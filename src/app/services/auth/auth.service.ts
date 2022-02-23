@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-
   apiPath = environment.api.path;
   apiVersion = environment.api.version;
   apiToken = environment.api.token;
@@ -38,14 +37,9 @@ export class AuthService {
       username: user,
       password
     };
-    const headers = {
-      'Content-Type': 'text/xml; charset=utf-8',
-      'Access-Control-Request-Method': 'POST',
-      'Access-Control-Request-Headers': 'Content-Type',
-      'Accept': 'text/json',
-      'token': this.apiToken
-    };
-    return this.http.post(`${this.apiPath}${this.apiVersion}${this.apiLoginPath}`, postData, headers);
+    return this.http.post(`${this.apiPath}${this.apiVersion}${this.apiLoginPath}`,
+      postData,
+      this.getHeaders('POST'));
   }
 
   isUserLogged() {
@@ -56,4 +50,14 @@ export class AuthService {
     this.userLogged = userLogged;
   }
 
+  getHeaders(method: string) {
+    const headers = {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Access-Control-Request-Method': method,
+      'Access-Control-Request-Headers': 'Content-Type',
+      'Accept': 'application/json',
+      'token': this.apiToken
+    };
+    return headers;
+  }
 }

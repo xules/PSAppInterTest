@@ -48,14 +48,7 @@ export class LoginPage implements OnInit {
     const formValues = this.form.value;
     this.authService.login(formValues.user, formValues.password)
       .then(async  response => {
-        // Si la validación es correcta redirimos a la página de PsycologistList.
-        /*const alert = await this.alertController.create({
-          header: 'Login OK',
-          message: 'Pulse Ok para continuar en la aplicación',
-          buttons: ['OK']
-        });
-        await alert.present();
-         */
+        this.authService.setUserLogged(true);
         this.navController.navigateForward('psychologist-list');
       })
       .catch(async error => {

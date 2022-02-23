@@ -25,7 +25,6 @@ export class PsychologistPage implements OnInit {
     this.activatedRoute.queryParams.subscribe(async params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.idPsychologist = this.router.getCurrentNavigation().extras.state.id;
-        console.log('[PsychologistPage] Entramos en PsychologistPage......' + this.idPsychologist);
         this.loadPsychologist(this.idPsychologist);
       }
     });
@@ -40,7 +39,7 @@ export class PsychologistPage implements OnInit {
       .then( async data  => {
         let status = await data.status;
         if (data.status == 200) {
-          this. psychologist = JSON.parse(data.data);
+          this.psychologist = JSON.parse(data.data);
         }else {
           const alert = await this.alertController.create({
             header: 'Ha habido un problema al cargar los psicólogos',
@@ -49,7 +48,6 @@ export class PsychologistPage implements OnInit {
                 text: 'OK',
                 id: 'confirm-button',
                 handler: () => {
-                  console.log('Confirm Okay');
                   this.navController.navigateForward('login')
                 }
               }
@@ -65,7 +63,6 @@ export class PsychologistPage implements OnInit {
               text: 'OK',
               id: 'confirm-button',
               handler: () => {
-                console.log('Confirm Okay');
                 this.navController.navigateForward('login')
               }
             }

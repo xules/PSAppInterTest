@@ -6,14 +6,13 @@
     <ion-title>Psicólogos</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title color="secondary" class="ion-text-wrap ion-text-center">
-        <ion-label *ngIf="psychologists">
-          <h2>Psicólogos en línea</h2>
-        </ion-label>
+      <ion-card-title
+          color="secondary" class="ion-text-wrap ion-text-center"
+          *ngIf="psychologists">
+        <h2>Psicólogos en línea</h2>
       </ion-card-title>
       <ion-card-subtitle color="terciary" class="ion-text-wrap ion-text-center">
         <ion-label *ngIf="psychologists" color="tertiary">
@@ -24,32 +23,19 @@
     <ion-card-content>
       <ion-list *ngIf="psychologists">
         <ion-header color="primary">
-          <ion-label color="secondary">
-            <h2>Psicólogos</h2>
-          </ion-label>
+          <h2>Psicólogos</h2>
         </ion-header>
         <ion-item *ngFor="let psychologist of psychologists" >
-          <ion-icon slot="start" size="large"
-            name="help-outline"
-            color="primary">
-          </ion-icon>
+          <ion-avatar slot="start" color="secondary">
+            <img src="assets/img/users/psychologist-default.png">
+          </ion-avatar>
           <ion-label size="medium" class="ion-text-wrap">
             <h2>{{psychologist.name}} {{psychologist.last_name}}</h2>
             <p>{{psychologist.presentation}}</p>
             <ion-button (click)="goToPsychologistDetail(psychologist.id)">VER PERFIL</ion-button>
           </ion-label>
         </ion-item>
-        <ion-item *ngFor="let psychologist of psychologists" >
-          <ion-icon slot="start" size="large"
-            name="help-outline"
-            color="primary">
-          </ion-icon>
-          <ion-label size="medium" class="ion-text-wrap">
-            <h2>{{psychologist.name}} {{psychologist.last_name}}</h2>
-            <p>{{psychologist.presentation}}</p>
-            <ion-button (click)="goToPsychologistDetail(psychologist.id)">VER PERFIL</ion-button>
-          </ion-label>
-        </ion-item>
+
       </ion-list>
     </ion-card-content>
   </ion-card>

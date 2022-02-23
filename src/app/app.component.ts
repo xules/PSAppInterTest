@@ -8,10 +8,7 @@ import { AuthService } from './services/auth/auth.service';
 })
 export class AppComponent implements OnInit {
   public appPages = [
-    { title: 'Inicio', url: '/login', icon: 'login' },
-    { title: 'Psicólogos', url: '/psychologist-list', icon: 'person' },
-    { title: 'Favoritos', url: '/psychologist', icon: 'heart' },
-    { title: 'About', url: '/folder/Archived', icon: 'about' },
+    { title: 'Psicólogos', url: '/psychologist-list', icon: 'person' }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(
@@ -25,7 +22,6 @@ export class AppComponent implements OnInit {
     this.listenAuthState();
   }
 
-
   /**
    * Control de usuario registrado.
    */
@@ -33,7 +29,6 @@ export class AppComponent implements OnInit {
     this.authService.authenticationState.subscribe(async (state) => {
       if (await state) {
         this.menuController.enable(true);
-        // this.navController.navigateForward('psychologist-list');
       } else {
         this.menuController.enable(false);
         this.navController.navigateForward('login');
