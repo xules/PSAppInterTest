@@ -1,0 +1,7 @@
+{
+  "name": "PSonrieApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
