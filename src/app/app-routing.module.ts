@@ -10,6 +10,18 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'psychologist-list',
+    loadChildren: () => import('./pages/psychologist/psychologist-list/psychologist-list.module').then( m => m.PsychologistListPageModule)
+  },
+  {
+    path: 'psychologist',
+    loadChildren: () => import('./pages/psychologist/psychologist/psychologist.module').then( m => m.PsychologistPageModule)
   }
 ];
 

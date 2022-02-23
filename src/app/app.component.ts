@@ -1,18 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MenuController, NavController } from '@ionic/angular';
+import { AuthService } from './services/auth/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'Inicio', url: '/login', icon: 'login' },
+    { title: 'Psicólogos', url: '/psychologist-list', icon: 'person' },
+    { title: 'Favoritos', url: '/psychologist', icon: 'heart' },
+    { title: 'About', url: '/folder/Archived', icon: 'about' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  constructor(
+    private authService: AuthService,
+    private navController: NavController,
+    private menuController: MenuController,
+  ) {
+
+  }
+  ngOnInit(){
+    this.listenAuthState();
+  }
+
+
+  /**
+   * Control de usuario registrado.
+   */
+  listenAuthState() {
+    this.authService.authenticationState.subscribe(async (state) => {
+      if (await state) {
+        this.menuController.enable(true);
+        // this.navController.navigateForward('psychologist-list');
+      } else {
+        this.menuController.enable(false);
+        this.navController.navigateForward('login');
+      }
+    });
+  }
+
+  doLogout() {
+    this.authService.setUserLogged(false);
+  }
 }
